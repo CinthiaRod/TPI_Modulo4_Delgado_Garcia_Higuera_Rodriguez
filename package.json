@@ -1,0 +1,26 @@
+{
+  "name": "tpi",
+  "version": "1.0.0",
+  "description": "API RESful Gestión top de canciones",
+  "main": "BACKEND/index.js",
+  "scripts": {
+    "start": "node BACKEND/index.js",
+    "dev": "nodemon BACKEND/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
