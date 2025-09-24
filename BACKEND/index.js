@@ -1,6 +1,7 @@
 
 // Carga las variables de entorno
-const path = require('path');
+const path = require('path')
+const rateLimit = require("express-rate-limit")
 // Importa 'dotenv' y configura la ruta del archivo .env
 const dotenvResult = require('dotenv').config({ path: path.resolve(__dirname, '../BACKEND/.env') }); 
 if (dotenvResult.error) {
@@ -25,6 +26,15 @@ app.use(express.static('PUBLIC'));
 
 // Conectar a la base de datos
 connectDB();
+
+// Rate Limiting
+const generalLimiter = rateLimit({
+    windowMS: 15 * 60 * 1000, // 15 minutos
+    max: 50,
+    message: "Demasiadas peticiones. Intenta más tarde."
+})
+
+app.use(generalLimiter)
 
 // Rutas de la API
 app.use('/songs', songsRoutes); 
