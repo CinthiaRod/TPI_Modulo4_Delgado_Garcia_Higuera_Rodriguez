@@ -3,6 +3,9 @@ const User = require('../MODELS/usersModel'); // Importa el modelo de usuarios M
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken'); 
 
+const saltRounds = 12;
+const PEPPER = process.env.PEPPER_SECRET;
+
 class UserService { 
     async registerUser(username, password, role) {
         // 1. Verifica si el nombre de usuario ya existe
@@ -20,8 +23,10 @@ class UserService {
             throw error;
         }
 
-        // 3. Hashea la contraseña antes de guardarla
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // 3. Hashea la contraseña antes de guardarla (salt+pimienta)
+        const pepperPassword = password + PEPPER;
+        const sal = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(pepperPassword, sal);
 
         // 4. Crea y guarda el nuevo usuario en MongoDB
         const newUser = new User({ username, password: hashedPassword, role });
