@@ -1,17 +1,14 @@
-/* Importar la fuente de Google Fonts si no la tienes en tu HTML */
-@import url('https://fonts.com/css2?family=Merriweather:wght@400;700&display=swap');
+/* Importar la fuente de Google Fonts */
+@import url('https://fonts.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@800&display=swap');
 
-/* * Definición de la animación de pulso.
- * IMPORTANTE: Las reglas @keyframes deben estar al nivel superior del CSS.
- */
 @keyframes pulse {
     0% {
         transform: scale(1);
         opacity: 1;
     }
     50% {
-        transform: scale(1.03); /* Ligeramente más grande para el H1 */
-        opacity: 0.95; /* Suave cambio de opacidad */
+        transform: scale(1.03); 
+        opacity: 0.95; 
     }
     100% {
         transform: scale(1);
@@ -23,76 +20,124 @@ body {
     font-family: "Merriweather", serif;
     margin: 0;
     padding: 0;
-    background-color: #333; /* Tono gris oscuro para un fondo moderno */
-    color: #e0e0e0; /* Color de texto claro para asegurar contraste */
+    background-color: #222831; 
+    background-image: url('notas-musicales.png'); 
+    background-size:500px;
+    background-repeat: repeat; 
+    background-attachment: fixed; 
+
+    color: #0b2ce9c5; 
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column; 
     align-items: center;
-    flex-direction: column;
 }
 
+.header-content {
+    width:100%;
+    max-width: 1200px; 
+    margin: 20px auto 0 auto; 
+
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    
+    padding: 0 20px; 
+    box-sizing: border-box; 
+    min-height: 44px;
+}
+
+h1 {
+    margin: 0; 
+    color: #FFFFFF; 
+    animation: pulse 3s infinite; 
+    font-family: "Montserrat", sans-serif; 
+    font-size: 3.0em; 
+    font-weight: 800; 
+    text-shadow: 0 0 10px rgba(16, 28, 29, 0.959); 
+    text-align: left;
+}
+
+/* Contenedor de los botones de autenticación */
+.user-auth-buttons {
+    display: flex;
+    gap: 10px; 
+    flex-shrink: 0; 
+}
+
+/* Estilo base para los botones del encabezado (Registro/Login) */
+.user-auth-buttons .auth-button,
+.user-auth-buttons #cerrar-sesion {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    white-space: nowrap; 
+    font-size: 1em; 
+    padding: 12px 25px;
+    margin: 0 !important; 
+    background-color: #00adb5; 
+    color: #FFFFFF; 
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    cursor: pointer;
+    text-decoration: none; 
+    box-sizing: border-box;
+}
+
+.user-auth-buttons .auth-button:hover {
+    background-color: #008187;
+    transform: translateY(-2px);
+}
+
+/* Estilo específico para el botón de cerrar sesión */
+.user-auth-buttons #cerrar-sesion {
+    background-color: #d9534f !important; 
+    color: #FFFFFF !important; 
+}
+
+.user-auth-buttons #cerrar-sesion:hover {
+    background-color: #c9302c !important; 
+    transform: translateY(-2px);
+}
+
+/* ----------------------------------------------------------- */
+/* --- ESTILOS DE CONTENIDO GENERAL Y MODALES --- */
+/* ----------------------------------------------------------- */
+
+/* --- Estilos de Contenedor y Secciones --- */
 .container {
     width: 90%;
     max-width: 800px;
     padding: 40px;
-    background-color: #1a1a1a;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    margin: 20px 0;
-}
-
-h1 {
-    color: #00adb5; /* Un color de acento vibrante */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    animation: pulse 2s infinite;
-}
-
-.section {
-    margin-top: 30px;
-    padding: 25px;
-    border-top: 2px solid #00adb5;
+    background-color: #222831; 
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
+    margin: 20px auto; 
 }
 
 h2 {
     color: #eeeeee;
+    border-bottom: 2px solid #393e46;
+    padding-bottom: 10px;
     margin-bottom: 20px;
-    text-transform: uppercase;
 }
 
-/* --- Estilos de Formularios --- */
-.user-auth-forms {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.user-auth-forms .form-group, .song-action-section .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 1;
-}
-
-#user-form, #song-form {
-    padding: 25px;
-    border: 1px solid #00adb5;
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-    background: #222831;
-}
-
-#user-form h3, #song-form h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #00adb5;
-    font-size: 1.5em;
+hr {
+    border: 0;
+    border-top: 1px solid #393e46;
+    margin: 30px 0;
 }
 
 /* --- Estilos de Inputs y Botones --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
 input[type="text"], input[type="password"], input[type="number"] {
     width: 100%;
     padding: 12px;
@@ -100,58 +145,203 @@ input[type="text"], input[type="password"], input[type="number"] {
     border: 1px solid #555;
     color: #eeeeee;
     border-radius: 5px;
-    box-sizing: border-box; /* Para que el padding no afecte el ancho */
+    box-sizing: border-box; 
 }
 
 input::placeholder {
     color: #a0a0a0;
 }
 
-button {
-    padding: 12px 20px;
+/* Estilo para los botones dentro de modales */
+.modal-content button {
+    margin-top: 15px;
+    width: 100%;
+    color: #FFFFFF; 
     background-color: #00adb5;
-    color: #222831;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+/* Estilo base para todos los botones, para asegurar que el texto sea blanco */
+button {
+    color: #FFFFFF;
+}
+
+/* --- Estilos para el campo de contraseña con toggle (Login) --- */
+.password-container {
+    position: relative; 
     width: 100%;
 }
 
-button:hover {
-    background-color: #008187;
-    transform: translateY(-2px);
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #00adb5;
+    font-size: 1.2em;
+}
+
+/* --- Estilos de MODALES (Modal Dialog) --- */
+.modal-dialog {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); 
+}
+
+.modal-content {
+    background-color: #393e46;
+    margin: 10% auto; 
+    padding: 30px;
+    border: 1px solid #00adb5;
+    width: 80%; 
+    max-width: 400px;
+    border-radius: 10px;
+    position: relative; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    color: #eeeeee;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    border-bottom: 2px solid #00adb5;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #00adb5;
+    font-size: 1.5em;
+}
+
+/* --- Estilos de Menú Desplegable (Dropdown) --- */
+
+.dropdown-menu-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    background-color: #393e46;
+    color: #eeeeee;
+    padding: 10px 18px;
+    font-size: 1em;
+    border: 1px solid #00adb5;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-toggle:hover {
+    background-color: #444;
+}
+
+.dropdown-toggle .arrow {
+    transition: transform 0.3s;
+}
+
+.dropdown-toggle.active .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #393e46;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1;
+    border-radius: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-item-button {
+    color: #eeeeee;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #444;
+}
+
+.dropdown-item-button:hover {
+    background-color: #00adb5;
+    color: #222831;
+}
+
+/* Eliminar el borde inferior del último botón */
+.dropdown-item-button:last-child {
+    border-bottom: none;
 }
 
 /* --- Estilos de listas y detalles --- */
 .song-list-display, .song-detail-display {
     margin-top: 20px;
-    text-align: left;
+    padding: 10px;
+    border: 1px solid #00adb5;
+    border-radius: 5px;
+    background-color: #222831;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .song-item {
-    background-color: #222831;
-    border: 1px solid #393e46;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    border-bottom: 1px solid #393e46;
+}
+
+.song-item:last-child {
+    border-bottom: none;
 }
 
 .song-item h3 {
-    margin-top: 0;
     color: #00adb5;
+    font-size: 1.2em;
+    margin: 0 0 5px 0;
+    text-align: left;
+    border-bottom: none;
 }
 
 .song-item p {
     margin: 5px 0;
 }
-
-/* --- Estilos para la barra divisoria --- */
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #00adb5, rgba(0, 0, 0, 0));
-    margin: 30px

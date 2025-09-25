@@ -1,89 +1,167 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Top Songs</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Top Songs</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Songs</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@800&display=swap">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header-content">
+        <h1>Top Songs 🎧</h1>
+        <div class="user-auth-buttons">
+            <button id="registrar-usuario-btn" class="auth-button" data-modal="modal-registro">
+                Registrar Usuario
+            </button>
+            
+            <button id="iniciar-sesion-btn" class="auth-button" data-modal="modal-login">
+                Iniciar Sesión
+            </button>
+            
+            <div id="logout-container" style="display: none;"> 
+                <button id="cerrar-sesion" style="background-color: #d9534f;">
+                    Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+      
+        <hr />
 
-      <div class="section">
-        <h2>Usuarios</h2>
-        <div class="user-auth-forms">
-          <div class="form-group">
-            <input type="text" id="username-registro" placeholder="Nombre de usuario" required />
-            <input type="password" id="password-registro" placeholder="Contraseña" required />
-            <button id="registrar-usuario">Registrar</button>
-          </div>
+        <div class="section">
+            <h2>Canciones</h2>
+            <div class="dropdown-menu-container">
+                
+                <button id="songs-menu-button" class="dropdown-toggle">
+                    Menú de opciones <span class="arrow">▼</span>
+                </button>
 
-          <div class="form-group">
-            <input type="text" id="username-login" placeholder="Nombre de usuario" required />
-            <input type="password" id="password-login" placeholder="Contraseña" required />
-            <button id="iniciar-sesion">Iniciar sesión</button>
-          </div>
-        </div>
-      </div>
+                <div id="songs-dropdown-content" class="dropdown-content">
 
-      <hr />
+                    <button class="dropdown-item-button" data-modal="modal-obtener-todas">
+                        Obtener todas las canciones
+                    </button>
 
-      <div class="section">
-        <h2>Canciones</h2>
+                    <button class="dropdown-item-button" data-modal="modal-obtener-id">
+                        Buscar Canción por ID
+                    </button>
 
-        <div class="song-action-section">
-          <button id="obtener-canciones">Obtener todas las canciones</button>
-          <div id="canciones-lista" class="song-list-display"></div>
-        </div>
+                    <button class="dropdown-item-button" data-modal="modal-agregar">
+                        Añadir una nueva canción
+                    </button>
 
-        <hr />
+                    <button class="dropdown-item-button" data-modal="modal-modificar">
+                        Modificar una canción
+                    </button>
 
-        <div class="song-action-section">
-          <h3>Obtener una canción</h3>
-          <div class="form-group">
-            <input type="text" id="id-cancion" placeholder="ID de la canción" />
-            <button id="obtener-cancion-por-id">Obtener por ID</button>
-          </div>
-          <div id="cancion-detalle" class="song-detail-display"></div>
-        </div>
+                    <button class="dropdown-item-button" data-modal="modal-eliminar">
+                        Eliminar una canción
+                    </button>
 
-        <hr />
+                </div> 
+            </div>
+        </div>
+        
+        <hr />
+    </div>
+    
+    <div id="modal-registro" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Registrar nuevo usuario</h3>
+            <div class="form-group">
+                <input type="text" id="username-registro" placeholder="Nombre de usuario" required />
+                <input type="password" id="password-registro" placeholder="Contraseña" required />
+                <button id="registrar-usuario">Registrar</button>
+            </div>
+        </div>
+    </div>
 
-        <div class="song-action-section">
-          <h3>Añadir una nueva canción</h3>
-          <div class="form-group">
-            <input type="text" id="nueva-cancion-titulo" placeholder="Título" required />
-            <input type="text" id="nueva-cancion-artista" placeholder="Artista" required />
-            <input type="number" id="nueva-cancion-anio" placeholder="Año" required />
-            <button id="agregar-cancion">Añadir</button>
-          </div>
-        </div>
+    <div id="modal-login" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Iniciar Sesión</h3>
+            <div class="form-group">
+                <input type="text" id="username-login" placeholder="Nombre de usuario" required />
+                
+                <div class="password-container">
+                    <input type="password" id="password-login" placeholder="Contraseña" required />
+                    <span class="toggle-password" id="toggle-password-login">
+                        👁️
+                    </span>
+                </div>
+                
+                <button id="iniciar-sesion">Iniciar sesión</button>
+            </div>
+            
+            <div class="forgot-password-link">
+                <a href="#" id="forgot-password-link" style="color: #00adb5;">¿Olvidó su contraseña?</a>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-obtener-todas" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Todas las Canciones</h3>
+            <button id="obtener-canciones-modal">Cargar Lista</button>
+            <div id="canciones-lista" class="song-list-display"></div>
+        </div>
+    </div>
 
-        <hr />
+    <div id="modal-obtener-id" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Buscar Canción por ID</h3>
+            <div class="form-group">
+                <input type="text" id="id-cancion" placeholder="ID de la canción" />
+                <button id="obtener-cancion-por-id">Obtener por ID</button>
+            </div>
+            <div id="cancion-detalle" class="song-detail-display"></div>
+        </div>
+    </div>
 
-        <div class="song-action-section">
-          <h3>Modificar una canción</h3>
-          <div class="form-group">
-            <input type="text" id="id-cancion-modificar" placeholder="ID de la canción" required />
-            <input type="text" id="titulo-modificar" placeholder="Título" />
-            <input type="text" id="artista-modificar" placeholder="Artista" />
-            <input type="number" id="anio-modificar" placeholder="Año" />
-            <button id="modificar-cancion">Modificar</button>
-          </div>
-        </div>
+    <div id="modal-agregar" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Añadir una nueva canción</h3>
+            <div class="form-group">
+                <input type="text" id="nueva-cancion-titulo" placeholder="Título" required />
+                <input type="text" id="nueva-cancion-artista" placeholder="Artista" required />
+                <input type="number" id="nueva-cancion-anio" placeholder="Año" required />
+                <button id="agregar-cancion">Añadir</button>
+            </div>
+        </div>
+    </div>
 
-        <hr />
+    <div id="modal-modificar" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Modificar una canción</h3>
+            <div class="form-group">
+                <input type="text" id="id-cancion-modificar" placeholder="ID de la canción" required />
+                <input type="text" id="titulo-modificar" placeholder="Título" />
+                <input type="text" id="artista-modificar" placeholder="Artista" />
+                <input type="number" id="anio-modificar" placeholder="Año" />
+                <button id="modificar-cancion">Modificar</button>
+            </div>
+        </div>
+    </div>
 
-        <div class="song-action-section">
-          <h3>Eliminar una canción</h3>
-          <div class="form-group">
-            <input type="text" id="id-cancion-eliminar" placeholder="ID de la canción" required />
-            <button id="eliminar-cancion">Eliminar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
+    <div id="modal-eliminar" class="modal-dialog">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Eliminar una canción</h3>
+            <div class="form-group">
+                <input type="text" id="id-cancion-eliminar" placeholder="ID de la canción" required />
+                <button id="eliminar-cancion">Eliminar</button>
+            </div>
+        </div>
+    </div>
+      
+    <script src="script.js"></script>
+  </body>
 </html>
