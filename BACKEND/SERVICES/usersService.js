@@ -34,33 +34,33 @@ class UserService {
         
         return newUser;
     }
-
     async loginUser(username, password) {
-        // 1. Encuentra al usuario por nombre de usuario
-        const user = await User.findOne({ username });
-        if (!user) {
-            const error = new Error('Credenciales inválidas');
-            error.statusCode = 401; 
-            throw error;
-        }
-
-        // 2. Compara la contraseña
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            const error = new Error('Credenciales inválidas');
-            error.statusCode = 401; 
-            throw error;
-        }
-
-        // 3. Genera un token de autenticación JWT
-        const token = jwt.sign(
-            { id: user._id, username: user.username, role: user.role }, 
-            process.env.JWT_SECRET, 
-            { expiresIn: '1h' } 
-        );
-        
-        return { token, user: { id: user._id, username: user.username, role: user.role } };
+    // 1. Encuentra al usuario
+    const user = await User.findOne({ username });
+    if (!user) {
+        const error = new Error('Credenciales inválidas');
+        error.statusCode = 401; 
+        throw error;
     }
+
+    // 2. Compara la contraseña con PEPPER
+    const pepperPassword = password + PEPPER;
+    const isMatch = await bcrypt.compare(pepperPassword, user.password);
+    if (!isMatch) {
+        const error = new Error('Credenciales inválidas');
+        error.statusCode = 401; 
+        throw error;
+    }
+
+    // 3. Genera el token
+    const token = jwt.sign(
+        { id: user._id, username: user.username, role: user.role }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: '1h' }
+    );
+    
+    return { token, user: { id: user._id, username: user.username, role: user.role } };
+}
 
     async getUsers() {
         return await User.find();
