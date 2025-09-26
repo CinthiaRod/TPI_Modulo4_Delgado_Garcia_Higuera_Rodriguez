@@ -127,7 +127,7 @@ function setupForgotPasswordListener() {
     if (link) {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Esta funcionalidad aún no está implementada.');
+            alert('🔔Para recuperar su contraseña favor de manar un correo a Help@topsongs.com🔔');
         });
     }
 }
