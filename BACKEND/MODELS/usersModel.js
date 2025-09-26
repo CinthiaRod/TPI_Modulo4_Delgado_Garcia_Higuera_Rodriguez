@@ -1,17 +1,21 @@
+// Importamos el módulo de Mongoose
 const mongoose = require('mongoose');
 
 // Define el esquema del usuario.
 const userSchema = new mongoose.Schema({
     username: {
+        //Nombre de usuario: texto obligatorio, único y sin espacios al inicio/fin
         type: String,
         required: true,
         unique: true,
         trim: true
     },
+    //Contraseña: texto obligatorio
     password: {
         type: String,
         required: true
     },
+     //Rol del usuario: solo puede ser 'user' o 'admin'; por defecto 'user'
     role: {
         type: String,
         enum: ['user', 'admin'],
@@ -28,5 +32,5 @@ userSchema.index(
 // Crea el modelo User a partir del esquema
 const User = mongoose.model('User', userSchema);
 
-// Exporta el modelo para usarlo en el servicio
+// Exportar el modelo para utilizarlo en servicios/controladores
 module.exports = User;

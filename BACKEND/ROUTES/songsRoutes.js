@@ -1,6 +1,8 @@
-const express = require('express'); // Importa el módulo 'express' para crear el enrutador
-// Este módulo permite manejar las rutas y solicitudes HTTP en la aplicación.
-const router = express.Router(); // Crea un nuevo enrutador de Express
+// Importa el módulo 'express' para crear el enrutador
+const express = require('express');
+// Crea una instancia de enrutador de Express para definir endpoints de la API
+const router = express.Router();
+
 // El enrutador se utiliza para definir las rutas de la API y asociarlas con los controladores correspondientes.
 const songsController = require('../CONTROLLERS/songsController'); // Importa el controlador de canciones
 // Este controlador contiene la lógica para manejar las solicitudes relacionadas con las canciones.

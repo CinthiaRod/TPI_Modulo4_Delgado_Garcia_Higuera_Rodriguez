@@ -1,15 +1,18 @@
-const express = require('express'); // Importa el módulo 'express' para crear el enrutador
-const router = express.Router(); // Crea un nuevo enrutador de Express
+// Importa el módulo 'express' para crear el enrutador
+const express = require('express');
+// Crea una instancia de enrutador de Express para definir endpoints de la API
+const router = express.Router(); 
+// Importamos el modulo rate limit
 const rateLimit = require("express-rate-limit")
 const userController = require('../CONTROLLERS/usersController'); // Importa el controlador de usuarios
 const authMiddleware = require('../MIDDLEWARES/authMiddleware'); // Importa el middleware de autenticación
 // Este middleware se utiliza para verificar si el usuario está autenticado antes de permitir el acceso a
 // las rutas protegidas.
 
-// Rate Limiting
+// Limitador estricto para autenticación (login/register) para mitigar brute-force
 const limiter = rateLimit({
     windowMS: 15 * 60 * 1000, // 15 minutos
-    max: 5,
+    max: 5,                   // máximo 5 intentos por IP en 15 min
     message: "Demasiadas peticiones. Intenta más tarde."
 })
 

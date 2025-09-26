@@ -1,5 +1,6 @@
 //Importar modulos
 const jwt = require('jsonwebtoken');
+
 //Cargar variables de entorno
 require('dotenv').config(); 
 
@@ -8,7 +9,7 @@ const verifyToken = (req, res, next) => {
     //Obtener token por parte del usuario mediante la seccion de "headers"
     const token = req.headers['authorization'];
 
-    //Si falta el token
+    //Si falta el token, envía 403 no autenticada
     if (!token) {
         //Acceso denegado debido a que el token no fue enviado
         return res.status(403).json({ message: 'Unauthorized: no authentication token provided.' });
@@ -18,7 +19,7 @@ const verifyToken = (req, res, next) => {
     const tokenParts = token.split(' ');
     //Si las partes del token son diferentes a 2 o el inicio no es con 'Bearer'
     if (tokenParts.length !== 2 || tokenParts[0] !== 'Bearer') {
-        //No se autoriza el acceso
+        // No se autoriza el acceso
         return res.status(401).json({ message: 'Authentication failed: token format is invalid.' });
     }
 
@@ -26,9 +27,9 @@ const verifyToken = (req, res, next) => {
     const actualToken = tokenParts[1];
 
     try {
-        //Decodificar token con metodo JWT
+        // Verificamos firma/expiración usando la clave secreta
         const decoded = jwt.verify(actualToken, process.env.JWT_SECRET); 
-        //Obtener informacion del usuario con base en la decodificacion
+        // Guardamos el payload decodificado en req.user para uso posterior
         req.user = decoded; 
         next();
 
@@ -38,7 +39,7 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-//Funcion para verificar administrados
+// Middleware: requiere token válido y además rol 'admin'
 const verifyAdmin = (req, res, next) => {
     //Obtener token desde la seccion de headers
     const token = req.headers['authorization'];

@@ -1,14 +1,16 @@
 //Importamos modulos
 const songsService = require('../SERVICES/songsService');
 
-//Creamos clase
+// Definición de un controlador orientado a las rutas de Express
 class songsController {
-    //Funcion para obtener todos las canciones
+    // Funcion para obtener todos las canciones
     async getAllsongs(req, res, next) {
         try {
+            // Trae el listado completo
             const songs = await songsService.getAllSongs();
+            // Responde 200 OK con el JSON de canciones
             res.status(200).json(songs);
-        } catch (error) { //Si sucede un error...
+        } catch (error) { 
             next(error); // Pasa el error al middleware de manejo de errores
         }
     }
@@ -20,9 +22,8 @@ class songsController {
             const { id } = req.params;
             //Buscar la canción con su ID utilizando la funcion desarrollada en "songsService"
             const song = await songsService.getSongsById(id);
-            //Si no se encuentra la canción...
+            // Si no existe, devolvemos 404 not found
             if (!song) {
-                //Enviar mensaje de estado al usuario de que la canción no fue encontrada
                 return res.status(404).json({ message: 'Song not found' });
             }
             //Si la solicitud fue exitosa, mostrar la informacion de la canción
@@ -32,35 +33,34 @@ class songsController {
         }
     }
 
-    //Funcion para crear una nueva canción
+    // Funcion para crear una nueva canción
     async createSong(req, res, next) {
         try {
             //Obtener informacion de la canción provista por el usuario
             const newSong = req.body;
             //Crear nueva canción con base en funcion de "songsService"
             const createdSong = await songsService.addSong(newSong);
-            //Si la solicitud es exitosa, mandar informacion de la canción creada
+            //Si la solicitud es exitosa, se manda informacion de la canción creada
             res.status(201).json(createdSong);
-        } catch (error) {//En caso de error, mostrarlo
+        } catch (error) {//En caso de error, se muestra
             next(error);
         }
     }
 
-    //Funcion para actualizar informacion de una canción
+    //Funcion para actualizar informacion de una canción existente
     async updateSong(req, res, next) {
         try {
-            //Obtener informacion por parte del usuario
+            // Tomamos el ID y los datos a actualizar en el request
             const { id } = req.params;
             const updatedData = req.body;
-            //Actualizar canción con funcion de "songsService"
+            // Se solicita servicio en la actualización
             const updatedSong = await songsService.updateSong(id, updatedData);
 
-            //Si no se encuentra la canción a actualizar
+            // Si no se encontró la canción, 404 Not Found
             if (!updatedSong) {
-                //Mandar aviso de que no pudo ser actualiado
                 return res.status(404).json({ message: 'Update failed: song not found' });
             }
-            //Si la solicitu es exitosa, mostrar la información actualizada
+            // Si se actualizó, devolvemos 200 OK con el recurso actualizado
             res.status(200).json(updatedSong);
 
         } catch (error) {//En caso de error, mostrarlo
@@ -71,17 +71,17 @@ class songsController {
     //Funcion para borrar canción
     async deleteSong(req, res, next) {
         try {
-            //Obtener ID del usuario
+            // Obtener ID del usuario
             const { id } = req.params;
-            //Eliminarlo con base en la funcion "songsService"
+            // Eliminarlo con base en la funcion "songsService"
             const deleted = await songsService.deleteSong(id);
 
-            //Si la canción a eliminar no fue encontrada
+            // Si no existía, 404 Not Found
             if (!deleted) {
                 //Mandar mensaje del problema
                 return res.status(404).json({ message: 'Delete failed: song not found' });
             }
-            //Si la solicitud fue exitosa, mostrar mensaje de ello
+            // Si se eliminó, 200 OK con un mensaje
             return res.status(200).json({ message: "Song deleted successfully."}); 
 
         } catch (error) {//En caso de algun otro error, mostrarlo

@@ -8,7 +8,7 @@ class UserController {
         try {
             //Obtener informacion del usuario
             const { username, password} = req.body;
-            let def_role = "user"
+            let def_role = "user" // Rol por defecto
 
             //Si el nuevo usuario no provee un nombre de usuario o una contraseña
             if (!username || !password) {
@@ -16,23 +16,23 @@ class UserController {
                 return res.status(400).json({ message: 'Missing registration data: username and password required.' });
             }
 
-            //En caso de que si la provea, registrarlo con base en la funcion de "userService"
+            // Llamamos al servicio para crear el usuario
             const newUser = await userService.registerUser(username, password, def_role);
-            //Mandar mensaje de solicitu exitosa
+            // Respuesta 201 Created con datos básicos (evitar incluir password)
             res.status(201).json({ message: 'User registered successfully.', user: { id: newUser.id, username: newUser.username, role: newUser.role } });
-        } catch (error) {//En caso de otro error...
+        } catch (error) {
             next(error); // Pasa el error al middleware de manejo de errores
         }
     }
 
-    //Funcion para ingresar a cuenta de un usuario
+    // Funcion para login de un usuario existente
     async login(req, res, next) {
         try {
             //Obtener la informacion del usuario
             const { username, password } = req.body;
             //En caso de que no provea nombre de usuario o contraseña
             if (!username || !password) {
-                //Se enviará un mensaje de error, solicitando la información requerida
+                // Devolvemos 200 OK con el token y el usuario (sin datos sensibles)
                 return res.status(400).json({ message: 'Missing credentials: please provide username and password.' });
             }
             
@@ -46,7 +46,7 @@ class UserController {
         }
     }
 
-    //Funcion para conocer los usuarios registrados en la base de datos
+    // Listado de usuarios registrados
     async getUsers(req, res, next){
         try {
             //Utilizar funcion dentro de "userService" para obtener todos los usuarios
