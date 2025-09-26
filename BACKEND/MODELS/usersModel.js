@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// índice único parcial para admin para no permitir más de 1 cuenta de administrador
+userSchema.index(
+  { role: 1 },
+  { unique: true, partialFilterExpression: { role: "admin" } }
+);
+
 // Crea el modelo User a partir del esquema
 const User = mongoose.model('User', userSchema);
 
