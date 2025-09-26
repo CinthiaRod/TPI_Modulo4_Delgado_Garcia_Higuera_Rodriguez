@@ -7,13 +7,14 @@ class UserController {
     async register(req, res, next) {
         try {
             //Obtener informacion del usuario
-            const { username, password, role } = req.body;
-            let def_role = role
+            const { username, password} = req.body;
+            let def_role = "user"
             //Si el rol del nuevo usuario no fue definido
-            if (!role){
+            //if (!role){
                 //Colocarle rol de "ususario" (ya que tambien existe el de admin)
-                def_role = "user"
-            }
+                //def_role = "user"
+            //}
+            
             //Si el nuevo usuario no provee un nombre de usuario o una contraseña
             if (!username || !password) {
                 //Mandar mensaje de error, solicitando esa informacion
