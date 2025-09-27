@@ -16,11 +16,11 @@
         </div>
         <div class="user-auth-buttons">
             <button id="registrar-usuario-btn" class="auth-button" data-modal="modal-registro">
-                Registrar Usuario
+                📝Registrar Usuario
             </button>
             
             <button id="iniciar-sesion-btn" class="auth-button" data-modal="modal-login">
-                Iniciar Sesión
+                🔑Iniciar Sesión
             </button>
             
             <div id="logout-container" style="display: none;"> 
@@ -31,9 +31,9 @@
         </div>
     </div>
     
-    <!-- Franja de Canciones -->
+   <!-- Franja de Canciones -->
     <div class="container">
-      <h2>⭐ Canciones ⭐</h2>
+      <h2> Canciones </h2>
       <div class="dropdown-menu-container">
           <button id="songs-menu-button" class="dropdown-toggle">
               ☰ Menú<span class="arrow">▼</span>
@@ -41,19 +41,19 @@
 
           <div id="songs-dropdown-content" class="dropdown-content">
               <button class="dropdown-item-button" data-modal="modal-obtener-todas">
-                  Obtener todas las canciones
+                  📝 Obtener todas las canciones del top
               </button>
               <button class="dropdown-item-button" data-modal="modal-obtener-id">
-                  Buscar Canción por ID
+                  🔎 Buscar Canción por ID
               </button>
               <button class="dropdown-item-button" data-modal="modal-agregar">
-                  Añadir una nueva canción
+                 ✚ Añadir una nueva canción
               </button>
               <button class="dropdown-item-button" data-modal="modal-modificar">
-                  Modificar una canción
+                  🛠️ Modificar una canción
               </button>
               <button class="dropdown-item-button" data-modal="modal-eliminar">
-                  Eliminar una canción
+                  ❌ Eliminar una canción
               </button>
           </div> 
       </div>
@@ -61,12 +61,18 @@
 
     <!-- Slider de novedades -->
     <div class="slider-container">
-      <div class="slider" id="slider">
-        <div class="slide">🎵  1. Perlas Negras - Natanael Cano, Gabito Ballesteros</div>
-        <div class="slide">🎵  2. Por tus besos - Tito Double P</div>
-        <div class="slide">🎵  3. 2+2 - Omar Camacho, Victor Mendivil</div>
-      </div>
+  <div class="slider" id="slider">
+    <div class="slide" data-cancion="https://www.youtube.com/watch?v=-UXsF3Rl4cY">
+      1️⃣ Perlas Negras - Natanael Cano, Gabito Ballesteros
     </div>
+    <div class="slide" data-cancion="https://www.youtube.com/watch?v=F1sLPnWV6Jk">
+      2️⃣ Por tus besos - Tito Double P
+    </div>
+    <div class="slide" data-cancion="https://www.youtube.com/watch?v=wG6wAyUUDOE">
+      3️⃣ 2+2 - Omar Camacho, Victor Mendivil
+    </div>
+  </div>
+</div>
     
     <!-- Modal Registro -->
     <div id="modal-registro" class="modal-dialog">
@@ -88,17 +94,12 @@
             <h3>Iniciar Sesión</h3>
             <div class="form-group">
                 <input type="text" id="username-login" placeholder="Nombre de usuario" required />
-                
                 <div class="password-container">
                     <input type="password" id="password-login" placeholder="Contraseña" required />
-                    <span class="toggle-password" id="toggle-password-login">
-                        👁️
-                    </span>
+                    <span class="toggle-password" id="toggle-password-login">👁️</span>
                 </div>
-                
                 <button id="iniciar-sesion">Iniciar sesión</button>
             </div>
-            
             <div class="forgot-password-link">
                 <a href="#" id="forgot-password-link">¿Olvidó su contraseña?</a>
             </div>
@@ -109,7 +110,7 @@
     <div id="modal-obtener-todas" class="modal-dialog">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h3>Todas las Canciones</h3>
+            <h3>Top 10</h3>
             <button id="obtener-canciones-modal">Cargar Lista</button>
             <div id="canciones-lista" class="song-list-display"></div>
         </div>
@@ -169,15 +170,15 @@
         </div>
     </div>
 
+    
     <!-- Footer -->
-<footer>
-  <div class="footer-links">
-    <p><strong>Contacto: </p>
-    <p></p></strong> 💬 Whatsapp: 646-123-45-67 | 🖂 correo: contacto@topsongs.com</p>
-    <p><strong>________________________________________________________________</p>
-    <p><strong>¡Siguenos en nuestras redes sociales!</p>
-  </div>
-</footer>
+    <footer>
+      <div class="footer-links">
+        <p><strong>Contacto: </strong>💬 Whatsapp: 646-123-45-67 | 🖂 correo: contacto@topsongs.com</p>
+        <p>________________________________________________________________</p>
+        <p>¡Síguenos en nuestras redes sociales!</p>
+      </div>
+    </footer>
       
     <script src="script.js"></script>
   </body>
