@@ -8,7 +8,7 @@ Este sistema sigue el patrón de diseño MVC (Modelo-Vista-Controlador) para org
 //-----  Estructura del proyecto ------------
 
 📂 TPL_Modulo4_Delgado_Garcia_Higuera_Rodriguez
-├── 📂 BACKEND/
+├── 📂 BACKEND/              ➡️ Lógica de la API
 │   ├── 📂 CONFIG/           ➡️ Configuración de la base de datos
 │   │   └── 📃 DB.js
 │   ├── 📂 CONTROLLERS/      ➡️ Lógica de controladores (MVC)
@@ -29,14 +29,15 @@ Este sistema sigue el patrón de diseño MVC (Modelo-Vista-Controlador) para org
 │   │   └── 📃 usersService.js
         └── 📃 index.js 
 │           
-├── 📂 PUBLIC/
+├── 📂 PUBLIC/               ➡️ Sección visual de la API
     ├── ​​index.html
     ├── ​​script.js
     ├── ​​style.css
-    ├──.gitignore
-    ├── ​​package-lock.json ​➡️​ Dependencias del proyecto
-    ├── ​​package.json ​➡️​ Dependencias del proyecto
-    └── ​​README.md ➡️​ Documentación del proyecto
+
+├──.gitignore
+├── ​​package-lock.json ​➡️​ Dependencias del proyecto
+├── ​​package.json ​➡️​ Dependencias del proyecto
+└── ​​README.md ➡️​ Documentación del proyecto
 
 //-------------Modelos de Datos Implementados---------------
 Usuarios
@@ -47,6 +48,7 @@ Canciones
 title: titulo de la canción
 artist: artista que la interpreta
 year: año de lanzamiento
+
 //---------- ​Manejo de datos​​​ ----------------
 ✅​controllers/: Contiene los controladores que gestionan las acciones del cliente 
 ​​​✅​models/: Contiene la lógica para gestionar los datos de usuarios y canciones
@@ -74,20 +76,24 @@ Visual Studio Code (recomendado)
 Instrucciones para ejecutar el proyecto​​​
 1. Disponer en tu equipo de los software Visual Studio Code(VSC) y Git bash, previamente instalados, lo anterior para poder correr el proyecto.
 2. Abrir la capeta 📂 TPI_Modulo4_Delgado_Garcia_Higuera_Rodriguez/BACKEND en VSC.
-3. Posicionate en la terminal dentro de la carpeta TPI_Modulo4_Delgado_Garcia_Higuera_Rodriguez/BACKEND
-Enceder el sevidor en la terminal ejecutando el siguiente comando: node server.js
-Enceder el cliente en la terminal ejecutando el siguiente comando: node client.js
+3. Ejecutar comando "npm start" y abrir el enlace web para interactuar con la API (http://localhost:3000)
+** La funcionalidad completa de la API (agregar, modificar y eliminar canciones) solo está permitida para el administrador. 
 
-Uso del servidor TCP (server.js)
+
+//-------------Uso del servidor TCP (server.js)----------------
 
 El servidor está implementado usando el módulo net de Node.js y escucha en el puerto 3000. El servidor maneja las conexiones de múltiples clientes, recibe comandos y responde con los resultados de las acciones solicitadas
 
-//--------------Uso del cliente-----------------//
+//--------------Uso del cliente--------------------------
 
 El cliente está diseñado para interactuar con el servidor a través de comandos enviados en formato JSON.
 
 Al ejecutar el cliente, aparecerá el siguiente menú principal:
 
+SECCIÓN SUPERIOR: AUTENTICACIÓN DE USUARIOS Formulario de Registro:
+Campo: "Nombre de usuario" Campo: "Contraseña" Botón: "Registrar"
+
+Formulario de Login: Campo: "Nombre de usuario" Campo: "Contraseña" Botón: "Iniciar sesión"
 
 1. SECCIÓN SUPERIOR: AUTENTICACIÓN DE USUARIOS
 Formulario de Registro:
