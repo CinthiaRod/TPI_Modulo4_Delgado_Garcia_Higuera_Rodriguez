@@ -1,7 +1,7 @@
 /// Proyecto: Biblioteca de música personal ///
 
 //--------  Objetivo del Proyecto  -------------
-Desarrollar una API RESTful completa para la gestión de una biblioteca musical personal, implementando bases de datos MongoDB con relaciones entre artistas y canciones, junto con un sistema de autenticación de usuarios.
+Desarrollar una API RESTful completa para la gestión de una biblioteca musical donde se puede apreciar la lista de canciones más escuchadas en México, implementando bases de datos MongoDB con relaciones entre artistas y canciones, junto con un sistema de autenticación de usuarios.
 
 Este sistema sigue el patrón de diseño MVC (Modelo-Vista-Controlador) para organizar y estructurar el código de manera modular y escalable. 
 
@@ -66,12 +66,13 @@ POST /songs - Crear canción (autenticado)
 PUT /songs/:id - Actualizar canción (autenticado)
 DELETE /songs/:id - Eliminar canción (autenticado)
 
+
 //---------Instrucciones para Ejecutar el Proyecto----------------
 Prerrequisitos
 Node.js (v14 o superior)
-MongoDB Atlas o MongoDB local
 Git
 Visual Studio Code (recomendado)
+Instalación de los node modules necesarios (npm install express mongoose bcrypt dotenv express-rate-limit)
 
 Instrucciones para ejecutar el proyecto​​​
 1. Disponer en tu equipo de los software Visual Studio Code(VSC) y Git bash, previamente instalados, lo anterior para poder correr el proyecto.
@@ -90,11 +91,6 @@ El cliente está diseñado para interactuar con el servidor a través de comando
 
 Al ejecutar el cliente, aparecerá el siguiente menú principal:
 
-SECCIÓN SUPERIOR: AUTENTICACIÓN DE USUARIOS Formulario de Registro:
-Campo: "Nombre de usuario" Campo: "Contraseña" Botón: "Registrar"
-
-Formulario de Login: Campo: "Nombre de usuario" Campo: "Contraseña" Botón: "Iniciar sesión"
-
 1. SECCIÓN SUPERIOR: AUTENTICACIÓN DE USUARIOS
 Formulario de Registro:
 
@@ -112,12 +108,12 @@ Subsección 1: Obtener Todas las Canciones
 Botón: "Obtener todas las canciones"
 Área de visualización: Donde se muestra la lista completa de canciones
 
-Subsección 2: Buscar Canción Específica
+Subsección 2: Buscar Canción por su ID
 Título: "Obtener una canción"
 Campo: "ID de la canción"
 Botón: "Obtener por ID"
 
-Área de visualización: Detalles de la canción encontrada
+Por parte del usuario con acceso tipo administrador podrá, además de lo anterior acceder a:
 
 Subsección 3: Agregar Nueva Canción
 Título: "Añadir una nueva canción"
@@ -143,11 +139,10 @@ Botón: "Eliminar"
 // ---------Características Técnicas-----------
 Base de datos: MongoDB con Mongoose ODM
 Autenticación: JWT (JSON Web Tokens)
-Seguridad: Bcrypt para hashing de contraseñas
+Seguridad: Bcrypt para hashing de contraseñas, salt y pepper.
 Validación: Mongoose schema validation
 Estructura: Arquitectura modular MVC
 
-Relaciones: Referencias entre modelos (Artista → Álbum → Canción)
 
 // ----------Flujo de datos --------------
 Flujo de Solicitud (Request)
@@ -155,13 +150,13 @@ CLIENTE (Frontend Web)
     ↓ Eventos HTML / Fetch API
  SOLICITUD HTTP (GET/POST/PUT/DELETE)
     ↓ Enrutamiento Express
-RUTAS (Routes: artists.js, songs.js, albums.js, users.js)
+RUTAS (Routes: songsRoutes.js, usersRoutes.js)
     ↓ Middleware de Seguridad
-MIDDLEWARE (Auth: verifyToken, verifyAdmin)
+MIDDLEWARE (auth, Error, Validate)
     ↓ Lógica de Aplicación
- CONTROLADOR (Controller: artistsController.js, songsController.js, etc.)
+ CONTROLADOR (Controller: usersController.js, songsController.js.)
     ↓ Lógica de Negocio
-SERVICIO (Service: artistsService.js, songsService.js, etc.)
+SERVICIO (Service: usersService.js, songsService.js, etc.)
     ↓ Acceso a Datos
 MODELO (Model: Mongoose Schemas)
     ↓ Operaciones Database
